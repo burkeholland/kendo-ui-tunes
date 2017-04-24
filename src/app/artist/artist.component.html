@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-xs-12">
+    <input type="search" #searchBox (keyup)="search(searchBox.value)" class="form-control input-lg well" placeholder="Type to search for artist...">
+    <!--<kendo-autocomplete [data]="searchResults" [filterable]="true" (filterChange)="filterChange($event)" (valueChange)="valueChange($event)" [valueField]="'artistName'" class="search">
+    </kendo-autocomplete>-->
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4" *ngIf="searchResults.length > 0">
+    <h3>Search Results</h3>
+    <p *ngFor="let artist of searchResults">
+      <a id="{{ artist.artistId }}" href="#" (click)="getAlbums(artist.artistId, artist.artistName)">{{ artist.artistName }}</a>
+    </p>
+  </div>
+  <div class="col-xs-12" [ngClass]="{'col-sm-8': searchResults.length > 0 }">
+    <h3>{{ selectedArtist }}</h3>
+    <app-album [artistId]="artistId" *ngIf="artistId > 0"></app-album>
+  </div>
+</div>
+  
+
+
+
+

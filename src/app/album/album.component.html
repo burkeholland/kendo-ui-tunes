@@ -1,0 +1,26 @@
+<kendo-grid 
+  [data]="view" 
+  [selectable]="true"
+  [sortable]="true"
+  [sort]="sort"
+  (sortChange)="sortChange($event)"
+  [pageSize]="pageSize"
+  [skip]="skip"
+  [pageable]="true"
+  (pageChange)="pageChange($event)"
+  >
+  <kendo-grid-column field="artworkUrl60" title=" " width="95">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <img src="{{ dataItem.artworkUrl60 }}">
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="collectionName" title="Album Title"></kendo-grid-column>
+  <kendo-grid-column field="releaseDate" title="Release Date">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <p>{{ dataItem.releaseDate | date }}</p>
+    </ng-template>
+  </kendo-grid-column>
+  <div *kendoGridDetailTemplate="let dataItem">
+    <app-track [collectionId]="dataItem.collectionId" (onPlayTrack)="playTrack($event)"></app-track>
+  </div>
+</kendo-grid>

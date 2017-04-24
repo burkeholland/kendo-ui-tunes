@@ -1,0 +1,12 @@
+<kendo-grid
+      [data]="view"
+      [scrollable]="'none'"
+    >
+  <kendo-grid-column width="50">
+    <ng-template kendoGridCellTemplate let-dataItem>      
+      <app-track-control [track]="dataItem"></app-track-control>
+    </ng-template>
+  </kendo-grid-column>
+  <kendo-grid-column field="trackCensoredName" title="Track Name">
+  </kendo-grid-column>
+</kendo-grid>
