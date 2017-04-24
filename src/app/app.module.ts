@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 
 // Import the Kendo UI Component
 import { GridModule } from '@progress/kendo-angular-grid';
-import { AutoCompleteModule } from '@progress/kendo-angular-dropdowns';
 
 import { ArtistComponent } from './artist/artist.component';
 import { AlbumComponent } from './album/album.component';
@@ -32,8 +31,7 @@ import { PlayerComponent } from './player/player.component';
     JsonpModule,
 
     // import the Kendo UI Component into the module
-    GridModule,
-    AutoCompleteModule
+    GridModule
   ],
   providers: [],
   bootstrap: [AppComponent]
