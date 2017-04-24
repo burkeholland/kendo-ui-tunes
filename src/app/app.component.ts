@@ -4,7 +4,8 @@ import { PlayerService } from './shared/player.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers: [PlayerService]
+  providers: [PlayerService],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   
