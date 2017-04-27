@@ -7,7 +7,7 @@ import { PlayerService } from '../shared/player.service';
 })
 export class PlayerComponent implements OnInit {
 
-  @ViewChild('player') playerRef;
+  @ViewChild('player') playerRef: any;
   player: any;
 
   constructor(private playerService: PlayerService) {
@@ -26,7 +26,7 @@ export class PlayerComponent implements OnInit {
     this.player = this.playerRef.nativeElement;
   }
 
-  playTrack(previewUrl) {
+  playTrack(previewUrl: string) {
     this.player.src = previewUrl;    
     this.player.play();
   }

@@ -1,4 +1,6 @@
-# KendoAngularItunes
+# Kendo UI Tunes 🎧
+
+This is a demo project that shows how to use <a href="http://www.telerik.com/kendo-angular-ui/">Progress Kendo UI for Angular</a>. It also demonstrates how to use Grids and Detail Grids, along with some other Angular concpets such as shared services.
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
 
@@ -16,12 +18,12 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Pfft. There are no tests. But if you really want to, you can run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io). But there are none so don't waste your time.
 
 ## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+There aren't any of these either. What am I, a QA department? Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Before running the tests make sure you are serving the app via `ng serve`. Then realize there are no tests and that's 33 seconds of your life you are never getting back.
 
 ## Further help
 

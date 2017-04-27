@@ -18,17 +18,7 @@ export class ArtistComponent {
 
   constructor(private itunesService: ItunesService, private playerService: PlayerService) { }
 
-  filterChange(filter: any): void {
-    this.itunesService.search(filter).then(results => {
-      this.searchResults = results;
-    });
-  }
-
-  valueChange(value: any): void {
-    console.log(value);
-  }
-
-  search(searchTerm) {
+  search(searchTerm: string) {
     this.itunesService.search(searchTerm).then(results => {
       this.searchResults = results;
     });

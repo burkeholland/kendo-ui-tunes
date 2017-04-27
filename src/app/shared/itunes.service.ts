@@ -19,7 +19,7 @@ export class ItunesService {
   constructor(private jsonp: Jsonp) {
   }
 
-  public search(searchTerm): Promise<any> {
+  public search(searchTerm: string): Promise<any> {
     return this.jsonp.get(`${API.SEARCH}callback=JSONP_CALLBACK&media=music&country=US&entity=musicArtist&term=${searchTerm}`)
       .toPromise()
       .then(data => data.json().results)
@@ -35,7 +35,7 @@ export class ItunesService {
     return this.jsonp.get(`${API.LOOKUP}callback=JSONP_CALLBACK&entity=album&id=${artistId}`)   
     .toPromise()
     .then(data => {
-      this._albums = data.json().results.filter(results => {
+      this._albums = data.json().results.filter((results: any) => {
         return results.wrapperType == 'collection'
       });
 
@@ -48,7 +48,7 @@ export class ItunesService {
     return this.jsonp.get(`${API.LOOKUP}callback=JSONP_CALLBACK&entity=song&id=${albumId}`)
     .toPromise()
     .then(data => {
-      return data.json().results.filter(result => {
+      return data.json().results.filter((result: any) => {
         return result.wrapperType == 'track';
       });
     })
