@@ -1,10 +1,11 @@
-// import { enableProdMode } from '@angular/core';
-import { platformBrowser } from '@angular/platform-browser';
-import { AppModuleNgFactory } from '../aot/src/app/app.module.ngfactory';
-// import { environment } from './environments/environment';
+import { enableProdMode } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-// if (environment.production) {
-//   enableProdMode();
-// }
+import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
 
-platformBrowser().bootstrapModuleFactory(AppModuleNgFactory);
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
