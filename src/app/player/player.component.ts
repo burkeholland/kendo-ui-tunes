@@ -3,6 +3,10 @@ import { PlayerService } from '../shared/player.service';
 import { ChartComponent } from '@progress/kendo-angular-charts';
 import { Track } from '../shared/models/track';
 
+declare var window;
+
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html'
