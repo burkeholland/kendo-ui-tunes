@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/subject';
-
+import { Track } from './models/track';
+ 
 @Injectable()
 export class PlayerService {
 
-  private playTrackSource = new Subject<string>();
+  private playTrackSource = new Subject<Track>();
   private pauseTrackSource = new Subject();
   private trackEndedSource = new Subject();
+  private frequencyDataSource = new Subject<Array<number>>();
 
   playTrack$ = this.playTrackSource.asObservable();
   pauseTrack$ = this.pauseTrackSource.asObservable();
   trackEnded$ = this.trackEndedSource.asObservable();
+  frequencyData$ = this.frequencyDataSource.asObservable();
 
-  playTrack(previewUrl: string) {
-    this.playTrackSource.next(previewUrl);
+  playTrack(track: Track) {
+    this.playTrackSource.next(track);
   }
 
   pauseTrack() {
@@ -24,4 +27,7 @@ export class PlayerService {
     this.trackEndedSource.next();
   }
 
+  frequencyData(data: Uint8Array) {
+    this.frequencyDataSource.next(Array.apply([], data));
+  }
 }

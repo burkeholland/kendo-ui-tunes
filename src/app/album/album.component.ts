@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ItunesService } from '../shared/itunes.service';
+import { PlayerService } from '../shared/player.service';
 import { GridDataResult, PageChangeEvent } from '@progress/kendo-angular-grid';
 import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
 
@@ -31,7 +32,7 @@ export class AlbumComponent {
   get artistId() { return this._artistId }
 
 
-  constructor(private itunesService: ItunesService) { }
+  constructor(private itunesService: ItunesService, private playerService: PlayerService) { }
 
   getAlbums() {
     this.itunesService.getAlbums(this.artistId).then((results: Array<any>) => {
@@ -52,5 +53,10 @@ export class AlbumComponent {
   pageChange(event: PageChangeEvent): void {
     this.skip = event.skip;
     this.getAlbums();
+  }
+  
+  // pauses the currently playing track when the row is collapsed
+  pauseTrack() {
+    this.playerService.pauseTrack();
   }
 }

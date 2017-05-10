@@ -1,16 +1,17 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerService } from '../../shared/player.service';
-import { Subscription } from 'rxjs/subscription';
+import { Subscription } from 'rxjs/Subscription';
+import { Track } from '../../shared/models/track';
 
 @Component({
   selector: 'app-track-control',
   templateUrl: './track-control.component.html',
   styleUrls: ['./track-control.component.scss']
 })
-export class TrackControlComponent implements OnInit, OnDestroy {
+export class TrackControlComponent implements OnDestroy {
 
   isPlaying: boolean = false;
-  @Input() public track: any;
+  @Input() public track: Track;
 
   playSub: Subscription;
   endedSub: Subscription;
@@ -26,16 +27,13 @@ export class TrackControlComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnInit() {
-  }
-
   ngOnDestroy() {
     this.playSub.unsubscribe();
     this.endedSub.unsubscribe();
   }
 
   playTrack() {
-    this.playerService.playTrack(this.track.previewUrl);
+    this.playerService.playTrack(this.track);
     this.isPlaying = true;
   }
 

@@ -8,6 +8,7 @@
   [skip]="skip"
   [pageable]="true"
   (pageChange)="pageChange($event)"
+  (detailCollapse)="pauseTrack($event)"
   >
   <kendo-grid-column field="artworkUrl60" title=" " width="95">
     <ng-template kendoGridCellTemplate let-dataItem>
