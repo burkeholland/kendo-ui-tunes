@@ -9,7 +9,7 @@ import 'hammerjs';
 
 // Import the Kendo UI Component
 import { GridModule } from '@progress/kendo-angular-grid';
-import { ChartModule, SparklineModule } from '@progress/kendo-angular-charts';
+import { SparklineModule } from '@progress/kendo-angular-charts';
 
 import { ArtistComponent } from './artist/artist.component';
 import { AlbumComponent } from './album/album.component';
@@ -37,7 +37,6 @@ import { TrackVisualizationComponent } from './track/track-visualization/track-v
 
     // import the Kendo UI Component into the module
     GridModule,
-    ChartModule,
     SparklineModule
   ],
   providers: [],
