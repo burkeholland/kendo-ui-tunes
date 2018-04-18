@@ -1,18 +1,14 @@
-<kendo-grid 
-      [data]="view"
-      [scrollable]="'none'">
+<kendo-grid [data]="view" [scrollable]="'none'">
   <kendo-grid-column width="50">
-    <ng-template kendoGridCellTemplate let-dataItem>      
-      <app-track-control 
-        [track]="dataItem">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <app-track-control [track]="dataItem">
       </app-track-control>
     </ng-template>
   </kendo-grid-column>
   <kendo-grid-column title="Track Name" class="track">
     <ng-template kendoGridCellTemplate let-dataItem>
       <div class="track-container">
-        <app-track-visualization 
-          [track]="dataItem">
+        <app-track-visualization [track]="dataItem">
         </app-track-visualization>
         <span class="title">{{ dataItem.trackCensoredName }}</span>
       </div>

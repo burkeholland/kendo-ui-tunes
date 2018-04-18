@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { ItunesService } from '../shared/itunes.service';
 import { PlayerService } from '../shared/player.service';
+import { ItunesService } from '../shared/itunes.service';
 
 @Component({
   selector: 'app-artist',
@@ -10,13 +10,15 @@ import { PlayerService } from '../shared/player.service';
   encapsulation: ViewEncapsulation.None
 })
 export class ArtistComponent {
-
   searchResults: Array<any> = [];
-  artistId: number = 0;
+  artistId = 0;
 
   selectedArtist: string;
 
-  constructor(private itunesService: ItunesService, private playerService: PlayerService) { }
+  constructor(
+    private itunesService: ItunesService,
+    private playerService: PlayerService
+  ) {}
 
   search(searchTerm: string) {
     this.itunesService.search(searchTerm).then(results => {
@@ -26,7 +28,7 @@ export class ArtistComponent {
 
   getAlbums(artistId: number, artistName: string) {
     this.playerService.pauseTrack();
-    
+
     this.artistId = artistId;
     this.selectedArtist = artistName;
   }

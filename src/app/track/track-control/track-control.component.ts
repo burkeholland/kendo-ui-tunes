@@ -1,4 +1,10 @@
-import { Component, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  Input,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { PlayerService } from '../../shared/player.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Track } from '../../shared/models/track';
@@ -9,7 +15,6 @@ import { Track } from '../../shared/models/track';
   styleUrls: ['./track-control.component.scss']
 })
 export class TrackControlComponent implements OnDestroy {
-
   isPlaying: boolean = false;
   @Input() public track: Track;
 
@@ -17,14 +22,13 @@ export class TrackControlComponent implements OnDestroy {
   endedSub: Subscription;
 
   constructor(private playerService: PlayerService) {
-    this.playSub = playerService.playTrack$.subscribe(
-      track => {
-        this.isPlaying = false;
-      });
+    this.playSub = playerService.playTrack$.subscribe(track => {
+      this.isPlaying = false;
+    });
 
     this.endedSub = playerService.trackEnded$.subscribe(() => {
       this.isPlaying = false;
-    })
+    });
   }
 
   ngOnDestroy() {
@@ -41,5 +45,4 @@ export class TrackControlComponent implements OnDestroy {
     this.playerService.pauseTrack();
     this.isPlaying = false;
   }
-
 }

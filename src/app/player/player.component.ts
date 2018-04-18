@@ -12,12 +12,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
   templateUrl: './player.component.html'
 })
 export class PlayerComponent implements OnInit {
-
   @ViewChild('player') playerRef: any;
   @ViewChild('visualiser') chartRef: any;
   player: any;
-  fftSize: number = 512;
-  smoothingTimeConstant: number = 0.3;
+  fftSize = 128;
+  smoothingTimeConstant = 0.3;
   audioContext: AudioContext;
   audioSource: MediaElementAudioSourceNode;
   analyser: AnalyserNode;
@@ -25,7 +24,6 @@ export class PlayerComponent implements OnInit {
   timeDomainData: Uint8Array;
   data: Array<number>;
   cancel: any;
-
 
   /*
     We setup our subscriptions to the player service in the constructor.
@@ -35,7 +33,7 @@ export class PlayerComponent implements OnInit {
   */
   constructor(private playerService: PlayerService, public ngZone: NgZone) {
     playerService.playTrack$.subscribe(track => {
-      this.playTrack(track.previewUrl);
+      this.playTrack(track.trackCensoredName);
     });
 
     playerService.pauseTrack$.subscribe(() => {
@@ -44,9 +42,8 @@ export class PlayerComponent implements OnInit {
   }
 
   ngOnInit() {
-
     // Setting up web audio to pull data from the track which is used as
-    // the data for the visualiser component. Pulled from John Bristowe 
+    // the data for the visualiser component. Pulled from John Bristowe
     // https://github.com/jbristowe/kendo-ui-audio/blob/master/main.js
 
     this.player = this.playerRef.nativeElement;
@@ -57,38 +54,40 @@ export class PlayerComponent implements OnInit {
 
     // IE11 doesn't support AudioContext, so we check for it first
     if (AudioContext) {
-      this.audioContext = new AudioContext;
-      this.audioSource = this.audioContext.createMediaElementSource(this.player);
-    
+      this.audioContext = new AudioContext();
+      this.audioSource = this.audioContext.createMediaElementSource(
+        this.player
+      );
+
       this.analyser = this.audioContext.createAnalyser();
       this.analyser.fftSize = this.fftSize;
       this.analyser.smoothingTimeConstant = this.smoothingTimeConstant;
 
       this.audioSource.connect(this.analyser);
       this.analyser.connect(this.audioContext.destination);
-      
+
       this.frequencyData = new Uint8Array(this.analyser.frequencyBinCount);
       this.timeDomainData = new Uint8Array(this.analyser.frequencyBinCount);
     }
-}
-
-  playTrack(previewUrl: string) {
-
-    cancelAnimationFrame(this.cancel);
-
-    this.player.src = previewUrl;    
-    this.player.play();
-
-    if (AudioContext) this.draw();
   }
 
-  /* 
+  playTrack(previewUrl: string) {
+    cancelAnimationFrame(this.cancel);
+
+    this.player.src = previewUrl;
+    this.player.play();
+
+    if (AudioContext) {
+      this.draw();
+    }
+  }
+
+  /*
     This function is called over and over again while a track is playing.
     Each time this function is called, the array of audio data is updated
     and the Kendo UI Chart will be redrawn. Using requestAnimationFrame helps us call it efficiently.
   */
   draw() {
-
     this.analyser.getByteFrequencyData(this.frequencyData);
     this.analyser.getByteTimeDomainData(this.timeDomainData);
 

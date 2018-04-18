@@ -10,7 +10,6 @@ import { SortDescriptor, orderBy } from '@progress/kendo-data-query';
   providers: [ItunesService]
 })
 export class AlbumComponent {
-
   view: GridDataResult;
 
   _artistId: number = 0;
@@ -22,24 +21,31 @@ export class AlbumComponent {
   pageSize: number = 5;
   skip: number = 0;
 
-  @Input() 
+  @Input()
   set artistId(artistId: number) {
     this._artistId = artistId;
 
     // get the albums for this artist
     this.getAlbums();
   }
-  get artistId() { return this._artistId }
+  get artistId() {
+    return this._artistId;
+  }
 
-
-  constructor(private itunesService: ItunesService, private playerService: PlayerService) { }
+  constructor(
+    private itunesService: ItunesService,
+    private playerService: PlayerService
+  ) {}
 
   getAlbums() {
     this.itunesService.getAlbums(this.artistId).then((results: Array<any>) => {
       this.view = {
-        data: orderBy(results, this.sort).slice(this.skip, this.skip + this.pageSize),
+        data: orderBy(results, this.sort).slice(
+          this.skip,
+          this.skip + this.pageSize
+        ),
         total: results.length
-      }
+      };
     });
   }
 
@@ -54,7 +60,7 @@ export class AlbumComponent {
     this.skip = event.skip;
     this.getAlbums();
   }
-  
+
   // pauses the currently playing track when the row is collapsed
   pauseTrack() {
     this.playerService.pauseTrack();
