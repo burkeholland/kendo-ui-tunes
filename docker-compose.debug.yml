@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  kendo-ui-tunes:
+    image: kendo-ui-tunes
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
